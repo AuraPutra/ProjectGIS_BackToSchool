@@ -24,7 +24,7 @@ const Login = () => {
                     <div className="flex justify-center">
                         <a href="/auth/google/redirect">
                             <button className="flex items-center justify-center bg-white text-black font-extrabold rounded-[1.5rem] w-full sm:w-[280px] md:w-[350px] lg:w-[400px] h-[60px] md:h-[75px] shadow-lg px-
-                                                hover:bg-black hover:text-white">
+                                                hover:bg-blue-500 hover:text-white">
                                 <img
                                     src="/GoogleLogo.svg"
                                     alt="Google"

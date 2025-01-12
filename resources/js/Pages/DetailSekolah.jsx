@@ -36,23 +36,30 @@ const DetailSekolah = ({ id }) => {
         <UserLayout>
             <div className="container mx-auto py-10 font-mono">
                 <h1 className="text-center text-2xl font-black mb-9">Detail Sekolah</h1>
-                <div className="flex flex-col items-center">
-                    {/* Foto Sekolah */}
-                    <img
-                        src={sekolah.foto || "/default_school.jpg"} // Gunakan foto default jika foto tidak tersedia
-                        alt="Foto Sekolah"
-                        className="w-96 h-96 object-cover mb-6 rounded-lg shadow-md"
-                    />
-                    {/* Nama dan Alamat Sekolah */}
-                    <div className="text-center">
-                        <h2 className="text-xl font-bold mb-2">{sekolah.nama}</h2>
-                        <p className="text-gray-600">{sekolah.alamat}</p>
+                {/* Kontainer dengan border biru */}
+                <div className="static max-w-md mx-auto border-4 border-blue-500 p-6 rounded-lg shadow-md">
+                    <div className="flex flex-col items-center">
+                        {/* Foto Sekolah */}
+                        <img
+                            src={sekolah.foto || "/default_school.jpg"} // Gunakan foto default jika foto tidak tersedia
+                            alt="Foto Sekolah"
+                            className="w-full h-64 object-cover mb-6 rounded-lg"
+                        />
+                        {/* Nama dan Alamat Sekolah */}
+                        <div className="text-center">
+                            <h2 className="text-xl font-bold mb-2">{sekolah.nama}</h2>
+                            <p className="text-gray-600">{sekolah.alamat}</p>
+                        </div>
                     </div>
-                </div>
-                <div className="mt-6 text-center">
-                    <a href="/list-sekolah" className="text-blue-500 underline hover:text-blue-700">
-                        Kembali ke Daftar
-                    </a>
+                    {/* Tombol Kembali */}
+                    <div className="mt-6 text-center">
+                        <a
+                            href="/list-sekolah"
+                            className="text-blue-500 underline hover:text-blue-700"
+                        >
+                            Kembali ke Daftar
+                        </a>
+                    </div>
                 </div>
             </div>
         </UserLayout>

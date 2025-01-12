@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, GeoJSON, Circle, Tooltip } from "react-leaflet";
+import L from "leaflet"; // Import Leaflet untuk custom icon
 import UserLayout from "@/Layouts/UserLayout";
 import "leaflet/dist/leaflet.css";
 
@@ -9,11 +10,36 @@ const Home = () => {
 
     // Fetch GeoJSON dari API Laravel
     useEffect(() => {
-        fetch("/api/schools")
+        fetch(`/api/schools?filter=${filter}`)
             .then((response) => response.json())
             .then((data) => setGeojsonData(data))
             .catch((error) => console.error("Error fetching GeoJSON:", error));
-    }, []);
+    }, [filter]); // Tambahkan filter sebagai dependency
+
+
+    // Custom Icons
+    const schoolIcons = {
+        SMA: L.icon({
+            iconUrl: "/markSMA.svg", // Path ke public/markSMA.svg
+            iconSize: [32, 32], // Ukuran ikon
+            iconAnchor: [16, 32], // Anchor ikon
+        }),
+        SMP: L.icon({
+            iconUrl: "/markSMP.svg",
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+        }),
+        SDN: L.icon({
+            iconUrl: "/markSD.svg",
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+        }),
+        default: L.icon({
+            iconUrl: "/markDefault.svg", // Tambahkan ikon default jika diperlukan
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+        }),
+    };
 
     // Style untuk fitur GeoJSON berdasarkan Nama_Sekol
     const styleFeature = (feature) => {
@@ -40,11 +66,11 @@ const Home = () => {
 
             const color =
                 schoolType === "SMA"
-                    ? "red"
+                    ? "gray"
                     : schoolType === "SMP"
                         ? "blue"
                         : schoolType === "SDN"
-                            ? "green"
+                            ? "red"
                             : "gray";
 
             return (
@@ -74,7 +100,7 @@ const Home = () => {
 
     const FilterComponent = ({ filter, setFilter }) => (
         <div
-            className="absolute z-[1000] bg-black text-white font-mono shadow-lg rounded p-4"
+            className="absolute z-[1000] bg-blue-500 text-white font-mono shadow-lg rounded p-4"
             style={{ top: "4rem", right: "1rem" }}
         >
             <label htmlFor="filter" className="block text-sm font-medium mb-2">
@@ -84,7 +110,7 @@ const Home = () => {
                 id="filter"
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
-                className="block w-full p-2 border bg-black text-white border-gray-300 rounded"
+                className="block w-full p-2 border bg-blue-500 text-white border-gray-300 rounded"
             >
                 <option value="All">No Filter</option>
                 <option value="SMA">SMA</option>
@@ -94,7 +120,6 @@ const Home = () => {
             </select>
         </div>
     );
-
 
     // Filter fitur GeoJSON berdasarkan pilihan
     const filteredFeatures =
@@ -125,15 +150,20 @@ const Home = () => {
                                     features: filteredFeatures,
                                 }}
                                 style={styleFeature}
+                                pointToLayer={(feature, latlng) => {
+                                    // Tentukan ikon berdasarkan tipe sekolah
+                                    const schoolType = feature.properties.Nama_Sekol.slice(0, 3).toUpperCase();
+                                    const icon = schoolIcons[schoolType] || schoolIcons.default;
+
+                                    // Gunakan ikon khusus sebagai marker
+                                    return L.marker(latlng, { icon });
+                                }}
                                 onEachFeature={(feature, layer) => {
                                     layer.bindTooltip(
-
                                         `<strong>${feature.properties.Nama_Sekol}</strong><br>${feature.properties.Alamat}`,
                                         { permanent: false, direction: "top" }
                                     );
                                 }}
-
-
                             />
                             {renderCircles(filteredFeatures)}
                         </>
@@ -141,7 +171,6 @@ const Home = () => {
                 </MapContainer>
             </div>
         </UserLayout>
-
     );
 };
 

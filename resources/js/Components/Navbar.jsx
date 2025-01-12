@@ -28,26 +28,26 @@ const Navbar = () => {
                 <div className="space-x-6">
                     <Link
                         href="/"
-                        className={`${isActive("/") ? "bg-black text-white py-2 px-4 transition-all duration-300" : "text-black transition-all duration-300"} font-mono rounded-lg hover:text-white hover:text-lg hover:bg-zinc-300 hover:py-1 hover:px-3`}
+                        className={`${isActive("/") ? "bg-blue-500 text-white py-2 px-4 transition-all duration-300" : "text-black transition-all duration-300"} font-mono rounded-lg hover:text-white hover:text-lg hover:bg-zinc-300 hover:py-1 hover:px-3`}
                     >
                         Dashboard
                     </Link>
                     <Link
                         href="/peta"
-                        className={`${isActive("/peta") ? "bg-black text-white py-2 px-4 transition-all duration-300" : "text-black transition-all duration-300"} font-mono rounded-lg hover:text-white hover:text-lg hover:bg-zinc-300 hover:py-1 hover:px-3`}
+                        className={`${isActive("/peta") ? "bg-blue-500 text-white py-2 px-4 transition-all duration-300" : "text-black transition-all duration-300"} font-mono rounded-lg hover:text-white hover:text-lg hover:bg-zinc-300 hover:py-1 hover:px-3`}
                     >
                         Peta
                     </Link>
                     <Link
                         href="/list-sekolah"
-                        className={`${isActive("/list-sekolah") ? "bg-black text-white py-2 px-4 transition-all duration-300" : "text-black transition-all duration-300"} font-mono rounded-lg hover:text-white hover:text-lg hover:bg-zinc-300 hover:py-1 hover:px-3`}
+                        className={`${isActive("/list-sekolah") ? "bg-blue-500 text-white py-2 px-4 transition-all duration-300" : "text-black transition-all duration-300"} font-mono rounded-lg hover:text-white hover:text-lg hover:bg-zinc-300 hover:py-1 hover:px-3`}
                     >
                         Sekolah
                     </Link>
                     {isAdmin ? (
                         <Link
                             href="/list-admin"
-                            className={`${isActive("/list-admin") ? "bg-black text-white py-2 px-4 transition-all duration-300" : "text-black transition-all duration-300"} font-mono rounded-lg hover:text-white hover:text-lg hover:bg-zinc-300 hover:py-1 hover:px-3`}
+                            className={`${isActive("/list-admin") ? "bg-blue-500 text-white py-2 px-4 transition-all duration-300" : "text-black transition-all duration-300"} font-mono rounded-lg hover:text-white hover:text-lg hover:bg-zinc-300 hover:py-1 hover:px-3`}
                         >
                             Admin
                         </Link>
@@ -69,7 +69,7 @@ const Navbar = () => {
                     ) : (
                         <Link
                             href="/login"
-                            className="bg-black text-white py-2 px-4 transition-all duration-300 font-mono rounded-lg hover:text-white hover:text-lg hover:bg-zinc-300 hover:py-1 hover:px-3"
+                            className="bg-blue-500 text-white py-2 px-4 transition-all duration-300 font-mono rounded-lg hover:text-white hover:text-lg hover:bg-zinc-300 hover:py-1 hover:px-3"
                         >
                             Login
                         </Link>

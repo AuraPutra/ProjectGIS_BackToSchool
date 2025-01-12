@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 
 // Halaman utama
 Route::get('/peta', [HomeController::class, 'index'])->name('home');
+Route::get('/api/schools', [HomeController::class, 'index']);
+
+
 Route::get('/', function () {
     return Inertia::render('Dashboard');
 });
